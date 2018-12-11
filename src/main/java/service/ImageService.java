@@ -2,12 +2,19 @@ package service;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 public class ImageService {
+    public static List<String> getNameList(List<File> files){
+        List<String> nameList = new ArrayList<>();
+        files.forEach(it -> nameList.add(it.getName()));
+
+        return nameList;
+    }
     public static List<Long> getSizeList(List<File> files){
         List<Long> sizeList = new ArrayList<>();
 
@@ -26,7 +33,7 @@ public class ImageService {
         return extensionList;
     }
 
-    private static   List<Image> getImageList(List<File> files){
+    private static List<Image> getImageList(List<File> files){
         List<Image> imageList = new ArrayList<>();
         files.forEach(it -> {
             try {
@@ -51,20 +58,47 @@ public class ImageService {
         return resolutionList;
     }
 
-    //TODO:just do it
+
     public static List<Double> getWeightHeightRatio(List<File> files){
         List<String> resolutionList = getResolutionList(files);
         List<Double> ratioList = new ArrayList<>();
 
-
-
-
-
-
-
-
-
+        resolutionList.forEach(it ->{
+            String[] s = it.split("x");
+            double w = Double.valueOf(s[0]);
+            double h = Double.valueOf(s[1]);
+            ratioList.add(h/w);
+        });
         return ratioList;
     }
+    private static int getAmountOfColors(BufferedImage image){
+        Set<Integer> colors = new HashSet<Integer>();
+        int w = image.getWidth();
+        int h = image.getHeight();
+        for(int y = 0; y < h; y++) {
+            for(int x = 0; x < w; x++) {
+                int pixel = image.getRGB(x, y);
+                colors.add(pixel);
+            }
+        }
+        return colors.size();
+    }
+
+    public static List<Integer> getColorList(List<File> files){
+        List<Integer> colorList = new ArrayList<>();
+
+        files.forEach(it ->{
+            try {
+                BufferedImage image = ImageIO.read(it);
+                colorList.add(getAmountOfColors(image));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return colorList;
+    }
+
+
 
 }

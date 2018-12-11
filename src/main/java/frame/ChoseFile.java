@@ -1,4 +1,4 @@
-package main;
+package frame;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -44,6 +44,8 @@ public class ChoseFile extends Application {
             List<String> extensionList = ImageService.getExtensionList(receivedFiles);
             List<Long> sizeList = ImageService.getSizeList(receivedFiles);
             List<String> resolutionList = ImageService.getResolutionList(receivedFiles);
+            List<Double> ratioList = ImageService.getWeightHeightRatio(receivedFiles);
+            List<Integer> colorList = ImageService.getColorList(receivedFiles);
 
 
             printLog(textArea, receivedFiles);
@@ -69,6 +71,8 @@ public class ChoseFile extends Application {
         }
         for (File file : files) {
             textArea.appendText(file.getAbsolutePath() + "\n");
+
+
 
         }
     }
