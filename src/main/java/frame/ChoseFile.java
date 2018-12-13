@@ -36,13 +36,18 @@ public class ChoseFile extends Application {
             textArea.clear();
             receivedFiles = fileChooser.showOpenMultipleDialog(primaryStage);
 
-            List<String> nameList = ImageService.getNameList(receivedFiles);
-            List<String> extensionList = ImageService.getExtensionList(receivedFiles);
-            List<Long> sizeList = ImageService.getSizeList(receivedFiles);
-            List<String> resolutionList = ImageService.getResolutionList(receivedFiles);
-            List<Double> ratioList = ImageService.getWeightHeightRatio(receivedFiles);
-            List<Integer> colorList = ImageService.getColorList(receivedFiles);
+//            List<String> nameList = ImageService.getNameList(receivedFiles);
+//            List<String> extensionList = ImageService.getExtensionList(receivedFiles);
+//            List<Long> sizeList = ImageService.getSizeList(receivedFiles);
+//            List<String> resolutionList = ImageService.getResolutionList(receivedFiles);
+//            List<Double> ratioList = ImageService.getWeightHeightRatio(receivedFiles);
+//            List<Integer> colorList = ImageService.getColorList(receivedFiles);
 
+
+            List<Integer> squareList = ImageService.getSquareList(receivedFiles);
+
+
+            squareList.forEach(it -> System.out.println(it));
 
 
 

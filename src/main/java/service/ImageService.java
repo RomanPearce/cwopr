@@ -58,6 +58,18 @@ public class ImageService {
         return resolutionList;
     }
 
+    public static List<Integer> getSquareList(List<File> files){
+        List<Image> imageList = getImageList(files);
+        List<Integer> squareList = new ArrayList<>();
+
+        imageList.forEach(it -> {
+            int w = it.getWidth(null);
+            int h = it.getHeight(null);
+            squareList.add(w*h);
+        });
+        return squareList;
+    }
+
 
     public static List<Double> getWeightHeightRatio(List<File> files){
         List<String> resolutionList = getResolutionList(files);
@@ -98,6 +110,8 @@ public class ImageService {
 
         return colorList;
     }
+
+
 
 
 
