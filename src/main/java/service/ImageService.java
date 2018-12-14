@@ -111,7 +111,53 @@ public class ImageService {
         return colorList;
     }
 
- 
+
+    public static List<Double> normalizeSize(List<File> files){
+        List<Double> normSizeList = new ArrayList<>();
+        List<Long> sizeList =  getSizeList(files);
+
+        Long max = Collections.max(sizeList);
+        Long min = Collections.min(sizeList);
+        for (int i = 0; i < sizeList.size(); i++) {
+            normSizeList.add((double)(sizeList.get(i) - min)/(max-min));
+        }
+        return normSizeList;
+    }
+
+    public static List<Double> normalizeExtension(List<File> files){
+        List<String> extensionList = getExtensionList(files);
+        List<Integer> intExtensionList = new ArrayList<>();
+        List<Double> normExtensionList = new ArrayList<>();
+
+        extensionList.forEach(it -> {
+            if(it.equals("jpg")){
+                intExtensionList.add(1);
+            }else{
+                intExtensionList.add(0);
+            }
+        });
+
+        Integer max = Collections.max(intExtensionList);
+        Integer min = Collections.min(intExtensionList);
+        for (int i = 0; i < intExtensionList.size(); i++) {
+            normExtensionList.add((double)(intExtensionList.get(i) - min)/(max-min));
+        }
+
+        return normExtensionList;
+    }
+
+    public static List<Double> normalizeRatio(List<File> files){
+        List<Double> normSizeList = new ArrayList<>();
+        List<Double> sizeList =  getWeightHeightRatio(files);
+
+        Double max = Collections.max(sizeList);
+        Double min = Collections.min(sizeList);
+        for (int i = 0; i < sizeList.size(); i++) {
+            normSizeList.add((sizeList.get(i) - min)/(max-min));
+        }
+        return normSizeList;
+    }
+
 
 
 

@@ -45,9 +45,13 @@ public class ChoseFile extends Application {
 
 
             List<Integer> squareList = ImageService.getSquareList(receivedFiles);
+            List<Double> normSizeList = ImageService.normalizeSize(receivedFiles);
+            List<Double> normExtensionList = ImageService.normalizeExtension(receivedFiles);
+            List<Double> normRatioList = ImageService.normalizeRatio(receivedFiles);
 
 
-            squareList.forEach(it -> System.out.println(it));
+
+            normRatioList.forEach(it -> System.out.println(it));
 
 
 
